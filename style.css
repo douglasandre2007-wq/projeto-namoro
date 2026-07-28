@@ -1,0 +1,1014 @@
+/* --- CONFIGURAÇÃO GERAL --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+}
+
+/* --- TELAS PRINCIPAIS --- */
+#menu-principal {
+    background-image: url('assets/slide-menu.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    z-index: 1;
+}
+
+#mundinho {
+    background-image: url('assets/cenario-floresta.avif'); 
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    position: relative;
+}
+
+
+
+/* --- ÁREA DO GIBI (Rolagem) --- */
+#tela-gibi {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    
+    /* ADICIONE ISSO AQUI */
+    background-image: url('assets/fundo-galeria.jpg'); /* Coloque o nome da sua imagem */
+    background-repeat: repeat; /* Faz a imagem se repetir infinitamente */
+    background-attachment: scroll; /* O fundo rola junto com a página */
+    background-size: auto; /* Mantém o tamanho original da imagem para ela repetir certinho */
+}
+
+#galeria-gibi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
+    padding: 40px;
+}
+
+
+/* --- ELEMENTOS DE APOIO --- */
+.header-gibi {
+    position: relative;
+    top: 0;
+    z-index: 2;
+    background: #f27777;
+    padding: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 4px solid #d76767;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+
+
+#btn-menu {
+    position: -webkit-sticky;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: white;
+    right: 10;
+    top: 46px;
+    width: 80px;
+    height: auto ;
+    cursor: pointer;
+    z-index: 50;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.7));
+    display: block;
+    
+}
+
+
+
+
+/* --- MODAL (AMPLIAR FOTO) --- */
+#modal-foto {
+    display: none;
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    background: rgba(0,0,0,0.9); 
+    z-index: 9999; 
+    justify-content: center; 
+    align-items: center;
+}
+
+#imagem-ampliada {
+    max-width: 90%;
+    max-height: 90%;
+    display: block;
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+/* --- MUNDO DOS PETS --- */
+
+#slide-pets {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Se quiser colocar uma cor de fundo padrão caso a imagem demore a carregar: */
+    background-color: #fce4ec; 
+}
+
+.bichinho {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    bottom: 6%;
+    image-rendering: pixelated;
+    z-index: 10;
+}
+
+/* Estilo do Menu Lateral (Escondido na direita por padrão) */
+#menu-lateral {
+    position: fixed;
+    top: 0;
+    right: -350px; /* Começa totalmente escondido para fora da tela */
+    width: 330px;
+    height: 100vh;
+    background-color: #fff0f3;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.4s ease-in-out; /* Animação suave de deslizar */
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Classe aplicada via JS para trazer o menu para dentro */
+#menu-lateral.menu-aberto {
+    right: 0;
+}
+
+/* Botão do Menu */
+#btn-menu-lateral {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 101;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+     width: 70px;
+}
+
+/* Card de Cenário */
+.card-cenario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-cenario button {
+    background: #ff758c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilo da Prancheta de Identidade */
+.prancheta {
+    background: #fff;
+    border: 2px dashed #ffb3c6;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.foto-prancheta {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ff477e;
+}
+
+.infos-pet {
+    flex-grow: 1;
+    font-size: 12px;
+}
+
+.nome-pet {
+    font-weight: bold;
+    font-size: 14px;
+    color: #d20a25;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+/* Botão de Ração */
+.secao-racao button {
+    width: 100%;
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Botão transparente para destacar apenas o desenho */
+#btn-som {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tamanho e estilo da nota musical */
+#icone-som {
+    width: 35px;  /* Ajuste a largura da imagem como preferir */
+    height: 35px; /* Ajuste a altura da imagem como preferir */
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+/* Efeito fofo de zoom ao passar o mouse por cima */
+#btn-som:hover #icone-som {
+    transform: scale(1.1);
+}
+
+/* --- BOTÕES DO MENU PRINCIPAL (CORRIGIDO) --- */
+
+.container-botao {
+    position: absolute; /* Isso mantém o botão no lugar certo */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 20;
+    width: 100px;  /* Tamanho definido aqui */
+    height: 100px;
+}
+
+/* Posicionamento dos botões (o pai que define onde ficam na tela) */
+#area-musicas { top: 68%; left: 31.0%; }
+#mundinho-btn { top: 68%; left: 45.5%; }
+#area-cartas  { top: 68%; left: 59.5%; }
+#area-gibi-btn { top: 68%; left: 74.0%; }
+
+/* Imagens dentro dos botões (o filho que preenche o pai) */
+.container-botao img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s;
+}
+
+/* Lógica de troca suave */
+.img-gif { opacity: 0; }
+.img-estatica { opacity: 1; }
+
+.container-botao:hover .img-estatica { opacity: 0; }
+.container-botao:hover .img-gif { opacity: 1; }
+.container-botao:hover { transform: scale(1.15); }
+
+
+ 
+/*botao de voltar do mundinho dos pets*/
+#voltar-btn {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 70px;
+    cursor: pointer;
+    z-index: 100;
+    display: block;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.8));
+    transition: transform 0.2s ease, filter 0.2s ease; 
+}
+ 
+.voltar-btn:hover {
+    transform: scale(1.2);
+}
+
+
+
+
+#voltar-fotos{
+     position: absolute;
+     top: 25px;
+     left: 30px;
+     width: 50px;
+     height: auto;
+     cursor: pointer;
+     z-index: 24;
+     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.7));
+     display: block;
+    
+}
+
+
+#texto-contador{
+   position: absolute;
+   top: 20px;
+   right: 410px; 
+   width: auto;
+   height:20px;
+   z-index: 24;
+   font-family:'Georgia',serif;
+   font-size: 20px;
+
+}
+
+
+
+#barra-armazenamento {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0%;
+    height: 100%;
+    background: #d20a25;
+    transition: width 0.5s ease-in-out;
+}
+
+.barra-fundo{
+  position: absolute;
+  top: 50px;
+  right:150px;
+  width: 250px;
+  height: 15px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#love-you-texto{
+    position: absolute;
+     top: 0px;
+     left: 200px;
+     width: 300px;
+     height: auto;
+     cursor: pointer;
+     z-index: 50;
+     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.7));
+     display: block;
+}
+
+
+
+.minhasFotos {
+    width: 450px;           /* Largura do "quadrinho" */
+    height: 350px;          /* Altura do "quadrinho" (ajuste se quiser mais quadrado) */
+    object-fit: cover;      /* Recorta a foto para preencher o quadrinho sem esticar */
+    border: 4px solid #fff; /* Borda branca para parecer um quadrinho de papel */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Sombra leve para dar profundidade */
+    margin: 10px;           /* Espaçamento entre as fotos */
+    display: inline-block;  /* Mantém elas lado a lado */
+    transition: transform 0.2s; /* Efeito suave ao passar o mouse */
+    object-fit: cover;
+}
+
+/* Efeito legal ao passar o mouse */
+.minhasFotos:hover {
+    transform: scale(1.05); /* Aumenta um pouco a foto ao passar o mouse */
+}
+
+/*AREA DAS MUSICAS*/
+#tela-musica {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    
+    /* ADICIONE ISSO AQUI */
+    background-image: url('assets/fundo-galeria.jpg'); /* Coloque o nome da sua imagem */
+    background-repeat: repeat; /* Faz a imagem se repetir infinitamente */
+    background-attachment: scroll; /* O fundo rola junto com a página */
+    background-size: auto; /* Mantém o tamanho original da imagem para ela repetir certinho */
+}
+
+/* Container que ocupa o resto da tela abaixo da barra superior */
+.carrossel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Calcula a altura exata da tela tirando a altura da barra do topo (ajuste se sua barra for maior/menor) */
+    height: calc(100vh - 110px); 
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+/* O wrapper agora ocupa quase toda a largura da tela (deixando espaço pras setas nas pontas) */
+.carrossel-trilho-wrapper {
+    width: 80vw; /* 80% da largura da tela para o card principal */
+    height: 80vh; /* 80% da altura disponível */
+    overflow: hidden; 
+}
+
+#carrossel-trilho {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s ease-in-out; /* Transição suave deslizando para o lado */
+}
+
+/* Cada seção agora preenche todo o espaço do wrapper do carrossel */
+.card-secao {
+    min-width: 80vw;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 200px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Posiciona as setas nas extremidades esquerda e direita da tela */
+.botao-passar {
+    background-color: rgba(255, 71, 126, 0.8);
+    color: rgb(253, 250, 250);
+    border: none;
+    font-size: 28px;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.botao-passar.esquerda {
+    left: 20px;
+}
+
+.botao-passar.direita {
+    right: 20px;
+}
+
+.botao-passar:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: rgb(255, 71, 126);
+}
+
+#card-contador {
+    /* Ocupa 80% da largura da tela e 80% da altura do espaço livre disponível */
+    width: 80vw !important;
+    height: 80vh !important;
+    
+    max-width: 900px; /* Opcional: limita para não ficar gigante em monitores ultrawide */
+    max-height: 600px; /* Opcional: limita a altura máxima */
+    
+    padding: 40px !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Deixa a escrita bem grande e proporcional para preencher o card grandão */
+
+
+#contador-namoro {
+    font-size: 70px !important;
+}
+
+#contador-namoro div:nth-child(2) {
+    font-size: 40px !important;
+    margin-top: 20px !important;
+}
+
+#contador-namoro p {
+    font-size: 40px !important;
+    margin-top: 40px !important;
+}
+
+#card-player {
+    width: 300px !important;       /* Força a largura a ser um terço (compacta) */
+    max-width: 300px !important;   /* Impede que ele ultrapasse esse tamanho */
+    min-width: 300px !important;   /* Impede que ele encolha demais */
+    margin-left: auto !important;  /* Joga ele obrigatoriamente para o canto direito */
+    margin-right: 40px !important; /* Dá um respiro da borda da tela */
+    background: #ca6464 !important; /* Fundo estilo Spotify */
+    color: white !important;
+    border-radius: 25px !important;
+    padding: 20px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Capa Circular */
+.spotify-capa-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffb6c1; /* Bordinha rosa romântica */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.spotify-capa-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Textos */
+.spotify-info {
+    text-align: center;
+    width: 100%;
+}
+
+#spotify-titulo {
+    font-size: 22px !important;
+    margin: 0 0 5px 0 !important;
+    font-weight: bold;
+}
+
+#spotify-artista {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0;
+}
+
+
+
+/* Barras de Progresso e Volume (Inputs de Arrastar) */
+.spotify-tempo-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+input[type="range"] {
+    flex: 1;
+    accent-color: #ffb6c1; /* Cor da barra de destaque */
+    cursor: pointer;
+}
+
+/* Botões de Reprodução */
+.spotify-controles {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.spotify-controles button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.spotify-controles button:hover {
+    transform: scale(1.1);
+}
+
+#botao-play-pause {
+    background: white;
+    color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*AREA DAS CARTAS*/
+/* Garante que o modal das cartas comece escondido */
+#modal-carta {
+    display: none !important;
+}
+#tela-cartas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-image: url('assets/fundo-galeria.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: auto !important;
+    overflow-y: auto !important; /* Permite rolar se o conteúdo for maior que a tela */
+    z-index: 1000 !important;
+}
+
+
+/* Layout geral do carrossel de cartas */
+.carrossel-container-cartas {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 1000px !important;
+    margin: 20px auto !important;
+}
+
+.carrossel-trilho-wrapper-cartas {
+    overflow: hidden !important;
+    width: 80% !important;
+}
+
+#carrossel-trilho-cartas {
+    display: flex !important;
+    transition: transform 0.4s ease-in-out !important;
+    width: 100% !important;
+}
+
+.card-item-carta {
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+    text-align: center !important;
+
+    padding: 20px !important;
+    border-radius: 15px !important;
+}
+
+.card-item-carta img.img-carta {
+    width: 80% !important;
+    max-width: 500px !important;
+    height: auto !important;
+    margin-bottom: 15px !important;
+}
+
+.card-item-carta .dica-texto {
+    font-size: 14px !important;
+    color: #555 !important;
+    margin-bottom: 15px !important;
+}
+
+.card-item-carta .area-senha {
+    display: flex !important;
+    gap: 8px !important;
+    justify-content: center !important;
+}
+
+.card-item-carta input {
+    width: 60% !important;
+    padding: 8px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+}
+
+.card-item-carta button {
+    padding: 8px 12px !important;
+    background-color: #ff6b81 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+}
+
+/* Botões de passar o carrossel */
+.carrossel-container-cartas .botao-passar {
+    background-color: #ff6b81 !important;
+    color: white !important;
+    border: none !important;
+    font-size: 20px !important;
+    padding: 10px 14px !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    z-index: 10 !important;
+}
+
+/* Modal / Fundo escuro da carta aberta */
+/* Modal / Fundo escuro da carta aberta */
+#modal-carta {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    display: none !important; /* Começa oculto */
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 9999 !important;
+}
+
+#modal-carta img {
+    max-width: 90% !important;
+    max-height: 85% !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3) !important;
+}
+
+#modal-carta .botao-fechar-carta {
+    position: absolute !important;
+    top: 20px !important;
+    right: 30px !important;
+    font-size: 40px !important;
+    color: white !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+}
+
+.card-item-carta img.img-carta {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+/* =========================================
+   CORREÇÕES PARA DISPOSITIVOS MÓVEIS (CELULAR)
+   ========================================= */
+
+
+@media (max-width: 1024px) {
+
+    /* 1. GALERIA DE FOTOS (2 colunas em vez de 3) */
+   
+    /* --- CORREÇÃO 1: Galeria em 2 colunas (Force usando !important) --- */
+   #galeria-gibi {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 5px !important;
+        gap: 8px !important;
+    }
+
+    /* Força cada item/foto dentro da galeria a se ajustar ao espaço das 2 colunas */
+    #galeria-gibi > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+
+
+    /* 2. BARRA DE AUXÍLIO SUPERIOR DA GALERIA (Empilha os itens) */
+    .header-gibi {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+        height: auto !important;
+        padding: 30px  !important;
+        position: relative !important;
+    }
+
+    #voltar-fotos{
+        top:5px;
+    }
+
+
+    .bloco-armazenamento {
+        width: 90% !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+    }
+
+    .secao-gif {
+        display: flex !important;
+        justify-content: center !important;
+        width: 0% !important;
+    }
+
+    .love-you-texto {
+        max-width: 0px !important;
+        height: 0px !important;
+    }
+
+   
+    
+
+    /* 4. ÁREA DAS MÚSICAS E CONTADOR DE NAMORO */
+    /* Garante que os cards do carrossel caibam na tela e não cortem textos */
+    .card-secao {
+        width: 85vw !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 15px !important;
+        margin: 0 auto !important;
+    }
+
+    /* Corrige o contador de namoro para quebrar linhas e não vazar nas pontas */
+        #contador-namoro {
+        font-size: 50px !important;
+       }
+
+       #contador-namoro div:nth-child(2) {
+         font-size: 30px !important;
+          margin-top: 10px !important;
+      }
+
+       #contador-namoro p {
+        font-size: 20px !important;
+        margin-top: 1px !important;
+      }
+
+    /* Corrige o player de música (Seção 2) para não vazar o texto lateral */
+    #card-player {
+        width: 85vw !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .spotify-capa-container {
+        width: 150px !important;
+        height: 150px !important;
+        margin: 0 auto !important;
+    }
+
+    /* Ajusta os botões do carrossel para não ficarem em cima do conteúdo */
+    .botao-passar {
+        padding: 15px !important;
+        font-size: 18px !important;
+    }
+
+   
+    /* --- Ajuste da Área dos Pets para Alinhar o Chão --- */
+    #area-jogo-pets {
+        /* Força a área do jogo a ocupar a tela inteira */
+        height: 100vh !important;
+        width: 100vw !important;
+        position: fixed !important; /* Fixa na tela */
+        bottom: 0 !important;
+        left: 0 !important;
+        top: auto !important;
+        z-index: 1 !important; /* Garante que fica acima do fundo mas abaixo do menu */
+
+        /* Mágica para alinhar o chão: */
+        background-image: url('cenario-floresta.avif') !important; /* Substitua pelo nome REAL da sua imagem de fundo */
+        background-size: cover !important; /* Dá zoom/esticada na imagem para cobrir a tela toda */
+        background-position: bottom center !important; /* Cola o final da imagem no final da tela */
+        background-repeat: no-repeat !important;
+    }
+
+    /* Ajusta o tamanho dos pets para ficarem proporcionais ao novo 'zoom' */
+    #area-jogo-pets img {
+        max-height: 0% !important; /* Ex: O pet terá 15% da altura da tela */
+        width: auto !important;
+    }
+
+    .bichinho {
+    position: absolute;
+    width: 180px ;
+    height: 180px ;
+    bottom: -40px!important;
+    image-rendering: pixelated;
+    z-index: 10;
+}
+
+.carrossel-container-cartas {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 40px auto !important;
+}
+
+.carrossel-trilho-wrapper-cartas {
+    overflow: hidden !important;
+    width: 80% !important;
+}
+
+#carrossel-trilho-cartas {
+    display: flex !important;
+    transition: transform 0.4s ease-in-out !important;
+    width: 100% !important;
+}
+
+.card-item-carta {
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+    text-align: center !important;
+
+    padding: 20px !important;
+    border-radius: 15px !important;
+}
+
+.card-item-carta img.img-carta {
+    width: 80% !important;
+    max-width: 220px !important;
+    height: auto !important;
+    margin-bottom: 15px !important;
+}
+
+.card-item-carta .dica-texto {
+    font-size: 14px !important;
+    color: #555 !important;
+    margin-bottom: 15px !important;
+}
+
+.card-item-carta .area-senha {
+    display: flex !important;
+    gap: 8px !important;
+    justify-content: center !important;
+}
+
+.card-item-carta input {
+    width: 60% !important;
+    padding: 8px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+}
+
+.card-item-carta button {
+    padding: 8px 12px !important;
+    background-color: #ff6b81 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+}
+
+/* Botões de passar o carrossel */
+.carrossel-container-cartas .botao-passar {
+    background-color: #ff6b81 !important;
+    color: white !important;
+    border: none !important;
+    font-size: 20px !important;
+    padding: 10px 14px !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    z-index: 10 !important;
+}
+
+.carrossel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Calcula a altura exata da tela tirando a altura da barra do topo (ajuste se sua barra for maior/menor) */
+    height:400px; 
+    width:1000px;
+    position: center;
+    overflow: hidden;
+}
+
+/* O wrapper agora ocupa quase toda a largura da tela (deixando espaço pras setas nas pontas) */
+.carrossel-trilho-wrapper {
+    width: 80vw; /* 80% da largura da tela para o card principal */
+    height: 80vh; /* 80% da altura disponível */
+    overflow: hidden; 
+}
+
+#carrossel-trilho {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s ease-in-out; /* Transição suave deslizando para o lado */
+}
+
+/* Cada seção agora preenche todo o espaço do wrapper do carrossel */
+.card-secao {
+    min-width: 80vw;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 200px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+}

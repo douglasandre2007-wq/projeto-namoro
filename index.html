@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    
+</head>
+<body>
+
+     <!-- Áudio global do site que toca em loop automático -->
+<audio id="musica-fundo" preload="auto"></audio>
+
+    <!-- Tela do Menu Principal -->
+    <div id="menu-principal">
+        <div id="area-musicas" class="container-botao" onclick="entrarNaMusica()">
+             <img src="assets/musicas.svg" class="img-estatica">
+             <img src="assets/musica-animado.gif" class="img-gif">
+        </div>   
+        <div id="mundinho-btn" class="container-botao" onclick="entrarNoPortal()">
+             <img src="assets/pets.svg" class="img-estatica">
+             <img src="assets/pets-animado.gif" class="img-gif">
+        </div>  
+        <div id="area-cartas" class="container-botao" onclick="entrarNaCarta()">
+             <img src="assets/cartas.svg" class="img-estatica">
+             <img src="assets/cartas-animado.gif" class="img-gif">
+        </div>
+        <div id="area-gibi-btn" class="container-botao" onclick="abrirGibi()">
+             <img src="assets/fotos.svg" class="img-estatica">
+             <img src="assets/fotos-animado.gif" class="img-gif">
+        </div>
+    </div>
+
+    <!-- Tela do Mundinho (Bichinhos) -->
+<div id="mundinho" style="display: none;">
+    <!-- Adicione o 'cursor: pointer' direto no estilo para garantir que o mouse reconheça -->
+    <img src="assets/menu.svg" id="voltar-btn" class="container-botao" onclick="voltarAoMenu()">
+    <div id="tooltip"></div>
+
+    <div class="header-pets">
+        <!-- Botão de menu que abre/fecha e muda de ícone/estado -->
+        <img src="assets/btn-menu-lateral.png" id="btn-menu-lateral" onclick="toggleMenuLateral()">
+         
+    </div>
+
+    <!-- O Menu Lateral Deslizante -->
+    <div id="menu-lateral" class="menu-fechado">
+        <!-- Topo do menu: Botão de som -->
+        <div class="menu-topo">
+           <button id="btn-som" onclick="alternarSom()">
+                <img id="icone-som" src="assets/nota-musical.png" alt="Ícone do Som">
+             </button>
+         </div>
+        <!-- Seletor de Cenário com setinhas -->
+        <div class="secao-cenario">
+            <h3>Cenário Atual</h3>
+            <div class="card-cenario">
+                <button onclick="mudarCenario(-1)">◀</button>
+                <div id="visor-cenario">Floresta</div>
+                <button onclick="mudarCenario(1)">▶</button>
+            </div>
+        </div>
+
+        <!-- Botão de soltar ração -->
+        <div class="secao-racao">
+            <button onclick="soltarRacao()">🦴 Soltar Ração</button>
+        </div>
+
+        <!-- Identidade dos Pets (Pranchetinhas) -->
+        <div class="secao-identidade">
+            <h3>Identidade dos Pets</h3>
+            
+            <!-- cachorro  -->
+            <div id="Bimbolho" class="prancheta">
+                <img src="assets/cachorro-parado.gif" alt="Foto do Pet" class="foto-prancheta">
+                <div class="infos-pet">
+                    <span class="nome-pet">Bimbolho</span>
+                    <label>Bimbolho é o mais novo, ama que brinquem com seu sininho, mas e o mais bagunceiro e vive fazendo xixi.</label>
+                </div>
+            </div>
+
+            <!-- esquilo -->
+            <div class="prancheta">
+                <img src="assets/esquilo-parado.gif" alt="Foto do Pet" class="foto-prancheta">
+                <div class="infos-pet">
+                    <span class="nome-pet">Domdom</span>
+                    <label>O primeiro de todos e o mais velho, por isso Domdom é o mais comunicativo e se acha o líder das pelucias.</label>
+                </div>
+            </div>
+
+            <!-- Coelho  -->
+            <div class="prancheta">
+                <img src="assets/coelho-parado.gif" alt="Foto do Pet" class="foto-prancheta">
+                <div class="infos-pet">
+                    <span class="nome-pet">Coeio</span>
+                    <label>Por ser o menos lembrado Cueio se tornou o mais rabugento, mesmo assim adora um carinho na orelha.
+                    </label>
+
+                </div>
+            </div>
+
+            
+            
+        </div>
+    </div>
+
+    <!-- Área onde os pets andam e a ração cai -->
+    <div id="area-jogo-pets" onclick="interagirComPet()">
+        <!-- Aqui ficam os elementos visuais dos pets no cenário -->
+    </div>
+</div>
+
+    
+    <!-- TELA DA MÚSICA -->
+<div id="tela-musica" style="display: none;">
+    <div class="header-gibi">
+        <img src="assets/voltar-fotos.svg" id="voltar-fotos" onclick="voltarAoMenu()">
+    </div>
+
+    <!-- Carrossel de Seções -->
+    <div class="carrossel-container">
+        <button class="botao-passar esquerda" onclick="mudarSecao(-1)">&#10094;</button>
+        
+        <div class="carrossel-trilho-wrapper">
+            <div id="carrossel-trilho">
+                
+                <!-- SEÇÃO 1: Contador de Tempo de Namoro -->
+                <div class="card-secao">
+                         <h3 style="font-size: 50px; color: #0d0d0d; margin-top: 15px;">Temos</h3>
+                       <div id="contador-namoro" style="font-family: 'Georgia', serif; font-size: 22px; color: #d20a25; line-height: 1.8; margin-top: 20px;">
+                   <div>
+                        <span id="c-anos">0</span> anos, 
+                        <span id="c-meses">0</span> meses, 
+                        <span id="c-dias">0</span> dias e
+                   </div>
+                 <div style="font-size: 18px; color: #555; margin-top: 10px;">
+                         <span id="c-horas">00</span>h 
+                         <span id="c-minutos">00</span>m 
+                         <span id="c-segundos">00</span>s
+                 </div>
+                        <p style="font-size: 14px; color: #888; margin-top: 15px;">Juntos ❤️</p>
+                      </div>
+                  </div>
+
+                <!-- SEÇÃO 2: Escolha de Música de Fundo -->
+                <div class="card-secao" id="card-player" style="width: 30% !important; flex-shrink: 0; margin-left: auto;">
+    
+                   <!-- Capa Circular Personalizada -->
+                  <div class="spotify-capa-container">
+                     <img id="spotify-capa" src="assets/capa1.jpg" alt="Capa da Música">
+                 </div>
+
+                        <!-- Informações da Música -->
+                      <div class="spotify-info">
+                         <h3 id="spotify-titulo">Nome da Música</h3>
+                         <p id="spotify-artista">Artista</p>
+                      </div>
+
+                        <!-- Barra de Tempo e Progresso -->
+                         <div class="spotify-tempo-container">
+                          <span id="tempo-atual">0:00</span>
+                           <input type="range" id="barra-progresso1" value="0" min="0" max="100" step="1">
+                           <span id="tempo-total">0:00</span>
+                         </div>
+
+                          <!-- Botões de Controle -->
+                         <div class="spotify-controles">
+                             <button onclick="mudarMusica(-1)">⏮</button>
+                             <button id="botao-play-pause" onclick="alternarPlayPause()">▶</button>
+                             <button onclick="mudarMusica(1)">⏭</button>
+                        </div>
+
+                
+
+               </div>
+
+               <!-- SEÇÃO 3: Nossas Músicas Favoritas -->
+                       <div class="card-secao">
+                       <h3 style="font-size: 28px; color: #0d0d0d; margin-top: 15px;">Algumas de nossas Músicas Favoritas</h3>
+                        <p style="font-family: 'Georgia', serif; font-size: 22px; color: #d20a25; line-height: 1.8; margin-top: 20px;">Grande parte dessas músicas me lembra você.</p>
+                     <p style="font-family: 'Georgia', serif; font-size: 22px; color: #d20a25; line-height: 1.8; margin-top: 20px;">Escutá-las faz com que eu pense em você.</p>
+                   </div>
+
+            </div>
+        </div>
+
+        <button class="botao-passar direita" onclick="mudarSecao(1)">&#10095;</button>
+    </div>
+</div>
+
+
+
+
+    <!-- Tela do Gibi (Galeria) -->
+    <div id="tela-gibi" style="display: none;">
+        <div class="header-gibi">
+            <img src="assets/voltar-fotos.svg" id="voltar-fotos" onclick="voltarAoMenu()">
+        
+                 <!-- Seção da Barra de Armazenamento (15 GB) -->
+                    <div class="bloco-armazenamento">
+                         <p id="texto-contador">Calculando armazenamento...</p>
+                        <div class="barra-fundo">
+                          <div id="barra-armazenamento"></div>
+                        </div>
+                   </div>
+             
+
+                 
+             <div class="secao-gif">
+                 <img id="love-you-texto" src="assets/love-you-texto.png" class="love-you-texto">
+             </div>
+        </div> 
+           
+<div id="galeria-gibi"></div>
+
+
+        <div id="galeria-gibi">
+            
+        </div>
+    </div>
+
+    <!-- Modal de Ampliação -->
+    <div id="modal-foto" style="display: none;">
+        <span class="fechar-modal" onclick="fecharModal()">&times;</span>
+        <img id="imagem-ampliada">
+    </div>
+
+    <!-- Áudio -->
+    <audio id="musica-ambiente" loop>
+        <source src="assets/musica-calminha.mp3" type="audio/mpeg">
+    </audio>
+
+
+
+
+
+<!-- AREA DAS CARTAS -->
+
+<div id="tela-cartas" style="display: none;">
+    <div class="header-gibi">
+        <img src="assets/voltar-fotos.svg" id="voltar-fotos" onclick="voltarAoMenu()">
+    </div>
+
+    <!-- Carrossel de Cartas com Setinhas -->
+    <div class="carrossel-container-cartas">
+        <button class="botao-passar esquerda" onclick="mudarCartaCarrossel(-1)">&#10094;</button>
+        
+        <div class="carrossel-trilho-wrapper-cartas">
+            <div id="carrossel-trilho-cartas">
+                
+                <!-- Cartinha 1 -->
+                <div class="card-item-carta">
+                    <!-- Note o onclick="abrirCartaModal(1)" adicionado na imagem -->
+                    <img src="assets/envelope.png" alt="Envelope 1" class="img-carta" id="img-envelope1" onclick="abrirCartaModal(1)">
+                    <p class="dica-texto"> Dica: A piada que quase nunca conseguimos fazer</p>
+                    <div class="area-senha">
+                        <input type="password" id="senha-carta1" placeholder="Digite a senha...">
+                        <button onclick="verificarSenha(1, 'cuidado para nao deixar cair')">Abrir</button>
+                    </div>
+                </div>
+
+                <!-- Cartinha 2 -->
+                <div class="card-item-carta">
+                    <img src="assets/envelope.png" alt="Envelope 2" class="img-carta" id="img-envelope2" onclick="abrirCartaModal(2)">
+                    <p class="dica-texto"> Dica: Corrija a palavra "Beijos"</p>
+                    <div class="area-senha">
+                        <input type="password" id="senha-carta2" placeholder="Digite a senha...">
+                        <button onclick="verificarSenha(2, 'berrus')">Abrir</button>
+                    </div>
+                </div>
+
+                <!-- Cartinha 3 -->
+                <div class="card-item-carta">
+                    <img src="assets/envelope.png" alt="Envelope 3" class="img-carta" id="img-envelope3" onclick="abrirCartaModal(3)">
+                    <p class="dica-texto"> Dica: Data do nosso primeiro beijo (DD/MM/AAAA) </p>
+                    <div class="area-senha">
+                        <input type="password" id="senha-carta3" placeholder="Digite a senha...">
+                        <button onclick="verificarSenha(3, '15/12/2024')">Abrir</button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <button class="botao-passar direita" onclick="mudarCartaCarrossel(1)">&#10095;</button>
+    </div>
+</div>
+
+<!-- MODAL DA CARTA ABERTA (Fundo escuro, começa oculto) -->
+<div id="modal-carta" style="display: none;">
+    <span class="botao-fechar-carta" onclick="fecharCartaModal()">&times;</span>
+    <img id="imagem-carta-aberta" src="" alt="Carta Aberta">
+</div>
+
+
+
+
+</body>
+</html>
