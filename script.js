@@ -297,7 +297,6 @@ function voltarAoMenu() {
 
 /*PARTE DA GALERIA DE FOTOS*/
 
-
 const API_URL = "https://script.google.com/macros/s/AKfycbxQ9iw-h1hdHrinSGotFFJVfhJFAcyQGRdqt7ujjB8BliV7gh1pmXYGwDy_gaMVSZhnHg/exec";
 
 async function carregarFotosAutomaticamente() {
@@ -308,27 +307,56 @@ async function carregarFotosAutomaticamente() {
         const galeria = document.getElementById('galeria-gibi');
         galeria.innerHTML = ""; // Limpa a galeria antes de desenhar
         
-        listaDeArquivos.forEach(url => {
+        listaDeArquivos.forEach(item => {
             const container = document.createElement('div');
             container.className = 'quadrinho';
             
-            // Focado exclusivamente em imagens
-            const img = document.createElement('img');
-            img.src = url;
-            img.className = 'minhasFotos';
-            container.appendChild(img);
+            // Descobre se o item é um objeto (novo formato) ou uma string (antigo)
+            const urlArquivo = (typeof item === 'object' && item !== null) ? item.url : item;
+            const tipoArquivo = (typeof item === 'object' && item !== null) ? item.tipo : 'image';
+            
+            if (tipoArquivo === 'video') {
+                const video = document.createElement('video');
+                video.src = urlArquivo;
+                video.className = 'minhasFotos';
+                video.muted = true;
+                video.controls = true;      // Mostra os controles de play/pause
+                video.preload = "metadata";
+                
+                // Impede que o clique no player abra o modal por engano
+                video.onclick = (e) => {
+                    e.stopPropagation();
+                };
+
+                container.appendChild(video);
+                
+                // Clique no container (fora dos controles) abre o modal do vídeo com segurança
+                container.onclick = (e) => {
+                    if (e.target !== video) {
+                        abrirModal(urlArquivo);
+                    }
+                };
+            } else {
+                const img = document.createElement('img');
+                img.src = urlArquivo;
+                img.className = 'minhasFotos';
+                container.appendChild(img);
+                
+                container.onclick = () => abrirModal(urlArquivo);
+            }
             
             galeria.appendChild(container);
-            container.onclick = () => abrirModal(url);
         });
 
-        // Atualiza a barra de armazenamento e o contador com base na quantidade real de fotos
-        atualizarBarraArmazenamento(listaDeArquivos.length);
+        if (typeof atualizarBarraArmazenamento === 'function') {
+            atualizarBarraArmazenamento(listaDeArquivos.length);
+        }
 
     } catch (erro) {
         console.error("Erro ao buscar arquivos na nuvem:", erro);
     }
 }
+
 
 // Função para fazer a barra de armazenamento crescer dinamicamente (base 15 GB)
 function atualizarBarraArmazenamento(quantidadeTotal) {
