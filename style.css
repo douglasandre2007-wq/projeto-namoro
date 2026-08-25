@@ -387,14 +387,19 @@ body, html {
 
 .minhasFotos {
     width: 450px;           /* Largura do "quadrinho" */
-    height: 350px;          /* Altura do "quadrinho" (ajuste se quiser mais quadrado) */
-    object-fit: cover;      /* Recorta a foto para preencher o quadrinho sem esticar */
-    border: 4px solid #fff; /* Borda branca para parecer um quadrinho de papel */
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Sombra leve para dar profundidade */
-    margin: 10px;           /* Espaçamento entre as fotos */
-    display: inline-block;  /* Mantém elas lado a lado */
-    transition: transform 0.2s; /* Efeito suave ao passar o mouse */
+    height: 350px;          /* Altura do "quadrinho" */
+    object-fit: cover;      /* Recorta para preencher sem esticar */
+    border: 4px solid #fff; /* Borda branca de quadrinho */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Sombra leve */
+    margin: 10px;           /* Espaçamento */
+    display: inline-block;  /* Mantém lado a lado */
+    transition: transform 0.2s; /* Efeito suave */
+}
+
+/* Adicione esta regra logo abaixo para garantir que o vídeo respeite o layout */
+video.minhasFotos {
     object-fit: cover;
+    background: #000; /* Fundo preto caso o vídeo demore um segundo para carregar */
 }
 
 /* Efeito legal ao passar o mouse */
